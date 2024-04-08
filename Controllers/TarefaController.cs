@@ -21,7 +21,11 @@ namespace TrilhaApiDesafio.Controllers
             // TODO: Buscar o Id no banco utilizando o EF
             // TODO: Validar o tipo de retorno. Se não encontrar a tarefa, retornar NotFound,
             // caso contrário retornar OK com a tarefa encontrada
-            return Ok();
+            var tarefa = _context.Tarefas.Where( x => x.Id == id);
+            if (tarefa == null){
+                return NotFound("Erro".);
+            }
+            return Ok(tarefa);
         }
 
         [HttpGet("ObterTodos")]
@@ -36,7 +40,8 @@ namespace TrilhaApiDesafio.Controllers
         {
             // TODO: Buscar  as tarefas no banco utilizando o EF, que contenha o titulo recebido por parâmetro
             // Dica: Usar como exemplo o endpoint ObterPorData
-            return Ok();
+            var tarefa = _context.Tarefas.Where(x => x.Titulo == titulo);
+            return Ok(tarefa);
         }
 
         [HttpGet("ObterPorData")]
